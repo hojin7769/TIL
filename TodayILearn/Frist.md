@@ -218,6 +218,6 @@ application.properties를 같은 위치가 아니라 다른 위치에 둘 경우
 4. classpath:/ :classpath 아래에 application.properties 만들어주는 방법
 
 # 참조 사이트
-[Using application.yml vs application.properties in Spring Boot](https://www.baeldung.com/spring-boot-yaml-vs-properties)
-[Spring Boot에서 properties 값 주입받기](https://bottom-to-top.tistory.com/46)
-[Application.propertices](https://velog.io/@max9106/Spring-Boot-%EC%99%B8%EB%B6%80%EC%84%A4%EC%A0%95-uik69crax3)
+[Using application.yml vs application.properties in Spring Boot](https://www.baeldung.com/spring-boot-yaml-vs-properties)   
+[Spring Boot에서 properties 값 주입받기](https://bottom-to-top.tistory.com/46)   
+[Application.propertices](https://velog.io/@max9106/Spring-Boot-%EC%99%B8%EB%B6%80%EC%84%A4%EC%A0%95-uik69crax3)   
