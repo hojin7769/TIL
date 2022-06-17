@@ -90,8 +90,9 @@ Logging 관련 라이브러리, DB 관련 라이브러리 등이 있겠다.
 
 
 ### Reference
-https://docs.gradle.org/current/userguide/java_library_plugin.html
-https://www.geeksforgeeks.org/how-is-compiletime-classpath-different-from-runtime-classpath-in-java/ https://tomgregory.com/gradle-implementation-vs-compile-dependencies/ https://stackoverflow.com/questions/4270950/compile-time-vs-run-time-dependency-java/4271013 https://stackoverflow.com/questions/44493378/whats-the-difference-between-implementation-and-compile-in-gradle   
+https://docs.gradle.org/current/userguide/java_library_plugin.html   
+https://www.geeksforgeeks.org/how-is-compiletime-classpath-different-from-runtime-classpath-in-java/ https://tomgregory.com/gradle-implementation-vs-compile-     dependencies/    
+https://stackoverflow.com/questions/4270950/compile-time-vs-run-time-dependency-java/4271013 https://stackoverflow.com/questions/44493378/whats-the-difference-between-implementation-and-compile-in-gradle      
 ### 출처:   
 (https://twinparadox.tistory.com/630) [Twinparadox Factory:티스토리]
 
