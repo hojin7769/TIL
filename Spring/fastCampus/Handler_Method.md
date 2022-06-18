@@ -29,18 +29,34 @@ Spring Web 에서 사용자의 요청(request)을 받은 응답(response)을 리
 > - @DeleteMapping
 > - @PatchMapping
 
-## 2. 요청 
+
+## 2. 요청
 
 > ## 핸들러 메소드가 받을 수 있는 요청들
 > 메소드 파라미터로 적어 넣을 수 있는 타입들
 > - ServletRequest, ServletResponse, HttpSession
 > - WebRequest, NativeWebRequest
 > - @RequestParam, @PathVariable
-> - @RequestBody, HttpEntity<B>
+> - @RequestBody, HttpEntity\<B\>
 > - @ModelAttribute, @SessionAttribute, Model, ModelMap
 > - @RequestHeader, @CookieValue
 > - Principal, Locale, TimeZone, InputStream, OutStream, Reader, Writer ....
 > - 등 너무 많다.
 
-  
+## 3. 응답
+> ## 핸들러 매소드가 내보낼 수 있는 응답들
+> 메소드가 리턴 할 수 있는 타입들
+> - ModelAndview
+> - String, View
+> - @ModelAttribute, Map, Model
+> - @ResponseBody
+> - HttpEntity\<B\>, ResponseEntity\<B\>
+> - HttpHeaders
+> - void
+> 등등
+
+void는 추천하지 않는다 확실한 리턴이 있어야 컨트롤러 이다.
+## Reference
+https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-ann-methods 
+
   
