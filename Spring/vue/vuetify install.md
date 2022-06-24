@@ -97,4 +97,11 @@ Would you like to install Vuetify 3 nightly build? (WARNING: Nightly builds are 
 
 등 확인 할수 있다.
 
+마지막으로 서버를 실행하여 확인해 보자
+
+![image](https://user-images.githubusercontent.com/85658845/175461473-6454f39d-22c7-482a-9ec8-aedcba700c3f.png)
+
+잘 실행된다.
+
+이상으로 오늘 배울 내용을 
 
