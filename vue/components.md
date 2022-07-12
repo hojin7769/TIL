@@ -181,3 +181,270 @@ watch가 많다는 것은 이미 해당 컴포넌트에서 반강제적으로 �
 > - watch의 사용을 최소화하고
 > - 공통적인 methods와 같은 Script들은 javaScript 파일로 별로 분리하는 것이 좋으며
 > - 컴포넌트 간의 깊은 바인딩(deep)은 자제해야 한다.
+
+## 부모 컴포넌트에서 자식 컴포넌트로 정보를 주는 방법
+
+### Props란?
+모든 컴포넌트 인스턴스는 각자의 자체 격리된 범위(scope)기 있다. 이때문에 하위 컴포넌트의 템플릿에서는
+
+상위 데이터를 직접 참조할 수 없는데, <span style="background:gray;color:black;">props</span>를 사용하면 하위 컴포넌트로 데이터를 전달 할 수 있습니다.
+
+![img.png](./imgs/componentImg.png)
+
+<code>props</code>는 상위 컴포넌트의 데이터를 전달하기 위한 사용자 지정 특성
+하위 컴포넌트에서는 <code>props</code> 옵션을 사용해 수신할 것으로 기대되는 <code>props</code>를 명시적으로 선언
+
+#하위컴포넌트 js
+```js
+Vue.component('child', {
+  // props 정의
+  props: ['message'],
+  // 데이터와 마찬가지로 prop은 템플릿 내부에서 사용할 수 있으며
+  // vm의 this.message로 사용할 수 있습니다.
+  template: '<span>{{ message }}</span>'
+})
+```
+그런 다음 일반 문자열을 다음과 같이 전달할 수 있습니다.(리터럴 방식)
+
+＃ 상위 컴포넌트 html template
+```vue
+<child message="안녕하세요!"></child>
+```
+이렇게 하면 상위 컴포넌트에서 message에 담은 <code>안녕하세요!</code>라는 문자열을 하위 컴포넌트의 message로 보내줄 수 있다.
+
+하지만 이 방식은 동적 바인딩은 아니라서, 상위 컴포넌트의 데이터가 변해도 하위 컴포넌트에는 반영이 되지 않는다.
+
+# 동적Props
+v-bind를 사용하면 부모 (상위 컴포넌트)의 데이터를 동적으로 바인딩해 자식(하위 컴포넌트)
+에게 전달할 수 있다. 데이터가 상위에서 업데이트 될 때마다 하위 컴포넌트로도 전달된다.
+
+＃ 상위 컴포넌트 html template
+```vue
+<div>
+  <input v-model="parentMsg">
+  <br>
+  <child v-bind:my-message="parentMsg"></child> # 동적 바인딩
+</div>
+```
+v-bind는 아래와 같이 : 을 활용해 단축 구문으로 사용하는 경우가 더 많습니다.
+
+```vue
+<child :my-message="parentMsg"></child>
+```
+전달하고 싶은 데이터가 객체라면, 인자 없이 v-bind를 써도 전달 가능합니다. (v-bind:prop-name 대신 v-bind:객체명)
+
+예를 들어 todo라는 객체가 있다면,
+
+```vue
+# 상위 컴포넌트 js
+todo: {
+  text: 'Learn Vue',
+  isComplete: false
+}
+```
+아래의 두 가지 작성 방식은 같은 동작을 한다. 각자의 props를 바인딩 하는 것과 객체로 바인딩 하는 방식이
+
+가져오는 효과는 같다.
+```vue
+# 상위 컴포넌트 html template
+1)
+<todo-item v-bind="todo"></todo-item>
+
+2)
+<todo-item
+  v-bind:text="todo.text"
+  v-bind:is-complete="todo.isComplete"
+></todo-item>
+```
+또는 다른 방법으로는
+
+```vue
+#부모페이지
+<uploadCom :alert="alert"  :confirm="confirm" ></uploadCom>
+```
+```js
+import UploadCompVue from '../components/alert/UploadComp.vue';
+
+export default {
+    components: {
+         uploadCom : UploadCompVue,
+    },
+}
+}
+```
+
+```vue
+#자식페이지
+<template>
+  <div>
+    <q-dialog v-model="props.alert">
+      <q-dialog v-model="props.confirm" persistent>
+        <q-card>
+          <q-card-section class="row items-center">
+            <q-avatar
+              icon="signal_wifi_off"
+              color="primary"
+              text-color="white"
+            />
+            <span class="q-ml-sm"
+              >You are currently not connected to any network.</span
+            >
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="취소" color="primary" v-close-popup />
+            <q-btn flat label="확인" color="primary" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+    </q-dialog>
+  </div>
+</template>
+<script>
+export default {
+  name: "SampleData",
+  components: {},
+  data() {
+    return {};
+  },
+  props: {
+    alert: {
+      type: String,
+      default: "false",
+    },
+    confirm: {
+      type: String,
+      default: "false",
+    },
+  },
+  setup(props, { emit }) {
+    return {
+      props,
+    };
+  },
+  created() {},
+  mounted() {},
+  unmounted() {},
+  methods: {},
+};
+</script>
+<style scoped></style>
+
+```
+
+이런식으로 props를 이용해 데이터를 줄수 있다.
+
+## 자식에서 부모로 정보 넘겨주기
+Emit은 자식에서 부모로 이벤트를 전달하는 역활을 한다.
+자식에서는 그 메서드를 $emit()에 작성하고 그 상위 부모에서는 v-on 속성으로 구현한다.
+
+```vue
+//이벤트 발생
+this.$emit('이벤트명');
+```
+
+```vue
+// 이벤트 수신
+<child-component v-on:이벤트명="상위 컴포넌트의 메서드명"></child-component>
+```
+
+$emit()을 호출하면 괄호 안에 정의된 이벤트가 발생한다.
+그리고 일반적으로 $emit()을 호출 하는 위치는 하위 컴포넌트의 특정 메서드 내부이다.
+따라서 $emit()을 호출할 때 사용하는 this는 하위 컴포넌트를 가르킨다.
+
+호출한 이벤트는 하위 컴포넌트를 등록하는 태그(상위 컴포넌트의 template 속성에 위치)에서 v-on:으로 받습니다.
+하위 컴포넌트에서 발생한 이벤트명을 v-on: 속성에 지정하고,
+속성의 값에 이벤트가 발생했을 때 호출될 상위 컴포넌트의 메서드를 지정합니다.
+
+예제 
+
+```vue
+<template>
+  <q-btn-group push>
+    <q-btn push label="목록" @click="listback" />
+    <q-btn push label="수정" @click="$emit('tt', true)" />
+    <q-btn push label="삭제" @click="deleteSeq" />
+  </q-btn-group>
+</template>
+<script>
+import { reactive } from 'vue';
+import { callUrl } from '../../assets/js/ui';
+import router from '../../router';
+export default {
+  name: 'ClickButton',
+  props: {
+    data: {
+      seq: {
+        type: String,
+        default: '0',
+      },
+      title: {
+        type: String,
+        default: '0',
+      },
+      content: {
+        type: String,
+        default: '0',
+      },
+      writer: {
+        type: String,
+        default: '0',
+      },
+      writeDay: {
+        type: String,
+        default: '0',
+      },
+    },
+  },
+  emits: ['tt'],
+  setup(props, { emit }) {
+    const listback = () => {
+      router.addRoute({
+        component: () => import('../..//views/ListView.vue'),
+        name: 'list',
+        path: '/list',
+        props: true,
+      });
+      router.push({ name: 'list' });
+    };
+    const deleteSeq = () => {
+      const param = {
+        NO_SEQ: props.data.seq,
+        DS_TITLE: props.data.title,
+        DS_CONTENT: props.data.content,
+        ID_USER: props.data.writer,
+        MapperId: 'BoardMapper.delete',
+      };
+      if (!confirm('삭제하시겠습니까?')) return false;
+      callUrl('save', param)
+          .then(function (response) {
+            if (response.status == '200') {
+              alert('삭제되었습니다.');
+              location.href = '/list';
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    };
+    const onEmit = function () {
+      emit('print', true);
+    };
+
+    return {
+      listback,
+      deleteSeq,
+      onEmit,
+    };
+  },
+};
+</script>
+
+```
+
+위에 코드를 보는것과 같이 vue3에서는 this라는 개념이 약하기 때문에 emit을 setup에 적역으로 등록을 해 놓고 사용한다.
+
+그럼 넘겨주는 저 string 이름으로 v-on: 속성에 사용한다
+
+
+
