@@ -1,13 +1,10 @@
 # vue
 
 ------------
->  Vue란
->  Vue.js를 사용하는 2가지 방법
->  Vue.js의 대체제들
->  Start Vue.js
-
-
-
+>  Vue란   
+>  Vue.js를 사용하는 2가지 방법   
+>  Vue.js의 대체제들   
+>  Start Vue.js   
 ------------
 ## 1. Vue란?
 ------------
