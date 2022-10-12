@@ -191,7 +191,9 @@ int tmp;
 
 ----------
 ### 기본형과 참조형
-
+ > #### 기본형
+>   - 논리형(boolean),문자형(char),정수형(byte,short,int,long),실수형(float,double)    계산을 위한 실제 값을 저장한다. 모두 8개
+> #### 참조형(reference)
 
 
 
