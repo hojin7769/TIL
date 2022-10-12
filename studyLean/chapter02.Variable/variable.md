@@ -71,6 +71,104 @@ int tmp;
 
 두변수는 값을 교환하는 것은 마치 두 컵에 담긴 내용뮬을 바꾸려면 컵이 하나 더 필요한 것과 같다.
 
+## 변수의 명명규칙
+
+> 프로그래밍에서 사용하는 모든 이름을 '식별자(identifier)'라 칭한다
+> 식별자는 같은 영역 내에서 서로 구분 될 수 있어야 한다.
+
+식별자를 만들때는 반드시 아래의 규칙을 지켜야한다.
+
+> 1. 대소문자가 구분되며 길이에 제한이 없어야 한다
+>   - True와 true는 서로 다른 것으로 간주한다
+> 2. 예약어를 사용해서는 안된다
+>    - true는 예약어라서 사용할 수 없지만, True는 가능하다
+> 3. 숫자로 시작해서는 안된다.
+>    - top10은 가능자만 7up은 허용되지 않는다.
+> 4. 특수문자는 '_'와 '$'만 허용한다
+>    - $harp은 허용되지만, S#arp은 허용하지 않는다 
+
+예약어는 키워드 또는 리져브드 워드(reserved word) 라고한다.
+
+예약어 종류
+<table style="text-align: center">
+<tr>
+<td>absteact</td>
+<td>default</td>
+<td>if</td>
+<td>package</td>
+<td>this</td>
+</tr>
+<tr>
+<td>assert</td>
+<td>do</td>
+<td>goto</td>
+<td>private</td>
+<td>throw</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>double</td>
+<td>implements</td>
+<td>protected</td>
+<td>throws</td>
+</tr>
+<tr>
+<td>break</td>
+<td>else</td>
+<td>import</td>
+<td>public</td>
+<td>transient</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>enum</td>
+<td>instanceof</td>
+<td>return</td>
+<td>true</td>
+</tr>
+<tr>
+<td>case</td>
+<td>extends</td>
+<td>int</td>
+<td>short</td>
+<td>try</td>
+</tr>
+<tr>
+<td>catch</td>
+<td>false</td>
+<td>interface</td>
+<td>static</td>
+<td>void</td>
+</tr>
+<tr>
+<td>char</td>
+<td>final</td>
+<td>long</td>
+<td>strictfp</td>
+<td>volatile</td>
+</tr>
+<tr>
+<td>class</td>
+<td>finally</td>
+<td>native</td>
+<td>super</td>
+<td>while</td>
+</tr>
+<tr>
+<td>const</td>
+<td>float</td>
+<td>new</td>
+<td>switch</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>for</td>
+<td>null</td>
+<td>synchronized</td>
+</tr>
+</table>
+
+
 
 
 
