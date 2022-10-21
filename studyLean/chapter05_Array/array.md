@@ -97,6 +97,189 @@ Arrays.toString(배열이름)
 * 예외적
   * char 배열은 println메서드로 출력하면 구분없이 그대로 출력됨
 
+## 1.5 배열의 복사
+배열을 다른 배열에 넣는것
+
+- 방법 1
+  - for문을 이용해서 복사하는것
+
+```text
+int[] arr = new int[5];
+
+int[] tmp = new int[arr.length+2];
+
+for(int i = 0; i < arr.length; i++){
+    tmp[i] = arr[i];
+}
+arr=tmp;
+```
+- 장점: 가장 간단하고 가장 알기 쉽게 복사가능
+- 단점: 많은 메모리 낭비를 하게됨
+
+- 방법2:
+  - System.arraycopy() 메서드 사용하기
+
+```text
+System.arraycopy(arr,0,copyArr,0,arr.length)
+```
+- 장점: 가장 알기 쉬움, 메모르 절약
+- 단점: 모르면 쓰기 어려움
+
+## 1.6 배열의 활용
+1. 총합과 평균
+```text
+int sum = 0;
+float average = 0f;
+
+int[] score = {100, 88, 100, 100, 90};
+
+for(int i = 0; i < score.length; i++) {
+	sum += score[i];
+}
+average = sum / (float)score.length;
+
+System.out.println("총합 : " + sum);
+System.out.println("평균 : " + average);
+```
+2. 최대값과 최소값
+```text
+int[] score = {79, 88, 91, 32, 100, 55, 95};
+
+int max = score[0], min = score[0];
+
+for(int i = 1; i < score.length; i++) {
+	if(score[i] > max){
+    	max = score[i];
+    } else if(score[i] < min){
+    	min = score[i];
+    }
+}
+
+System.out.println("최대값 : " + max);
+System.out.println("최소값 : " + min);
+```
+3. 섞기(shuffle)
+```text
+int[] numArr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+System.out.println(Arrays.toString(numArr));
+
+for(int i = 0; i < 100; i++) {
+	int n = (int)(Math.random() * 10); 
+    int tmp = numArr[0];
+    numArr[0] = numArr[n];
+    numArr[n] = tmp;
+}
+System.out.println(Arrays.toString(numArr));
+```
+# 2. String 배열
+## 2.1 String배열의 선언과 생성
+- 스트링 배열의 선언
+> String[] name = new String[3]
+
+## 2.2 String 배열의 초기화
+int 배열의 초기화와 같다
+```text
+String[] name = new String[3]; 
+name[0] = "Kim";
+name[1] = "Moon";
+name[2] = "Park";
+```
+## 2.3 char배열과 String 클래스
+> String클래스는 char배열에 기능을 추가한 것이다.
+
+char배열과 String클래스의 한 가지 중요한 차이
+- String객체(문자열)는 읽을수만 있을 뿐 내용을 변경할 수 없다는 뜻
+
+```text
+String str = "Java";
+str = str + "8"; // "Java8"이라는 새로운 문자열이 str에 저장된다.
+System.out.println(str); // "Java8"
+```
+위의 문장에서 문자열 str의 내용이 변경되는 것 같지만, 문자열은 변경할 수 없으므로 새로운 내용의 문자열이 생성된다. 
+### String클래스의 주요 메서드
+![img.png](img.png)
+
+equals() 메서드
+
+- 문자열의 내용이 같은지 다른지 확인하는데 사용한다.
+- 기본형 변수의 값을 비교하는 경우 '=='연산자를 사용하지만, 문자열의 내용을 비교할 때는 equals()를 사용해야 한다.
+
+## 2.4 커맨드 라인을 통해 입력받기
+- 커맨드 라인에 입력한 값이 문자열 배열에 담겨서 전달
+- "" 빈문자열 > 길이가 0인 배열 (자바에서는 허용
+
+```java
+public class Ex5_7_ {
+ 
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        System.out.println("매개변수의 개수:" + args.length);
+        for(int i= 0; i<args.length; i++) {
+            System.out.println("args[" + i + "] = \""+ args[i] + "\"" );
+        }
+    }
+ 
+}
+```
+출력:
+매개변수의 개수:0
+
+## 3.다차원 배열
+
+### 3.1 2차원 배열의 선언과 인덱스
+#### 2차원 배열:
+  - 테이블 형태의 데이터를 저장하기 위한 배열
+#### 2차원 배열의 선언:
+- int[][] score = new int[4][3]
+
+#### 2차원 배열 인덱스
+- int[][] score = new int[4][3];
+
+- 행 인덱스는 0~ 행의 길이 -1 : 0~3 까지
+
+- 열 인덱스는 0~ 열의 길이 -1 : 0~2 까지
 
 
+|score[0][0]|score[0][1]|score[0][2]|
+|------|---|---|
+|score[1][0]|score[1][1]|score[1][2]|
+|score[2][0]|score[2][1]|score[2][2]|
+|score[3][0]|score[3][1]|score[3][2]|
+
+### 3.2 2차원 배열의 초기화
+
+```java
+int[][] arr = new int[][] { {1, 2, 3}, {4, 5, 6} };
+int[][] arr = { {1, 2, 3}, {4, 5, 6} }; // new int[][]가 생략됨
+int[][] arr = {
+		{1, 2, 3},
+                {4, 5, 6}
+	};
+```
+```java
+int[][] score = {
+		{100, 100, 100},
+                {20, 20, 20},
+                {30, 30, 30},
+                {40, 40, 40},
+                {50, 50, 50}
+};
+```
+![img_1.png](img_1.png)
+
+### 3.3 가변 배열
+
+```java
+int[][] score = new int[5][3]; // 5행 3열의 2차원 배열 생성
+```
+
+```java
+int[][] score = new int[5][]; // 두 번째 차원의 길이는 지정하지 않는다.
+score[0] = new int[3];
+score[1] = new int[3];
+score[2] = new int[3];
+score[3] = new int[3];
+score[4] = new int[3];
+```
+2차원 배열을 생성하면 직사각형 테이블 형태의 고정적인 배열만 생성할 수 있지만, 각 행마다 다른 길이의 배열으 생성하는 것이 가능하다.
 
